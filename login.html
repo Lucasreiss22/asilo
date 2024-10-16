@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .navbar {
+            margin-bottom: 20px;
+        }
+        .btn {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+        h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <!-- Exibe as informações do usuário somente se ele estiver logado -->
+        {% if usuario %}
+            <span>Usuário: {{ usuario }}</span>
+            <span>ID: {{ usuario_id }}</span>
+            <span>{{ datetime }}</span>
+        {% else %}
+            <span>Usuário: Não logado</span>
+        {% endif %}
+    </div>
+    
+    <button onclick="history.back()" class="btn btn-secondary">Voltar</button>
+    
+    <h2>Login</h2>
+    <form method="POST">
+        <label for="usuario">Usuário:</label>
+        <input type="text" id="usuario" name="usuario" required>
+        <br>
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" required>
+        <br>
+        <button type="submit" class="btn">Entrar</button>
+    </form>
+</body>
+</html>

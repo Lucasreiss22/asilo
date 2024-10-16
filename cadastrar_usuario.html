@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Usuário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="file"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cadastrar Novo Usuário</h1>
+    <form action="{{ url_for('cadastrar_usuario') }}" method="post" enctype="multipart/form-data">
+        <label for="tipo_usuario">Tipo de Usuário:</label>
+        <select name="tipo_usuario" required>
+            <option value="medico">Médico</option>
+            <option value="enfermeiro">Enfermeiro</option>
+            <option value="cuidador">Cuidador</option>
+        </select>
+
+        <label for="usuario">Nome de Usuário:</label>
+        <input type="text" name="usuario" required>
+
+        <label for="senha">Senha:</label>
+        <input type="password" name="senha" required>
+
+        <label for="nome_completo">Nome Completo:</label>
+        <input type="text" name="nome_completo" required>
+
+        <label for="telefone">Telefone:</label>
+        <input type="text" name="telefone" required>
+
+        <label for="endereco">Endereço:</label>
+        <input type="text" name="endereco" required>
+
+        <label for="idade">Idade:</label>
+        <input type="number" name="idade" required>
+
+        <label for="curriculo">Currículo (opcional):</label>
+        <input type="file" name="curriculo">
+
+        <!-- Campos adicionais para cada tipo de usuário -->
+        <div id="campo-adicional"></div>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <script>
+        const tipoUsuarioSelect = document.querySelector('select[name="tipo_usuario"]');
+        const campoAdicionalDiv = document.getElementById('campo-adicional');
+
+        tipoUsuarioSelect.addEventListener('change', function() {
+            campoAdicionalDiv.innerHTML = '';  // Limpa os campos anteriores
+
+            if (this.value === 'medico') {
+                campoAdicionalDiv.innerHTML = '<label for="numero_crm">Número do CRM:</label><input type="text" name="numero_crm" required>';
+            } else if (this.value === 'enfermeiro') {
+                campoAdicionalDiv.innerHTML = '<label for="numero_coren">Número do COREN:</label><input type="text" name="numero_coren" required>';
+            } else if (this.value === 'cuidador') {
+                campoAdicionalDiv.innerHTML = '<label for="numero_cpf">Número do CPF:</label><input type="text" name="numero_cpf" required>';
+            }
+        });
+    </script>
+</body>
+</html>

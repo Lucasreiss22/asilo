@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Administração</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .navbar {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .btn {
+            padding: 10px 15px;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <span>Usuário: {{ usuario }}</span>
+        <span>ID: {{ usuario_id }}</span>
+        <span>{{ datetime.strftime("%d/%m/%Y %H:%M:%S") }}</span>
+    </div>
+
+    <h1>Bem-vindo, {{ usuario }}!</h1>
+
+    <h2>Painel de Administração</h2>
+
+    <ul>
+        <!-- Condicional para mostrar o link de cadastro de usuários apenas para admin1 -->
+        {% if is_admin %}
+            <li><a href="{{ url_for('cadastrar_usuario') }}">Cadastrar Usuários</a></li>
+        {% endif %}
+        <li><a href="{{ url_for('cadastrar') }}">Cadastrar Pacientes</a></li>
+        <li><a href="{{ url_for('buscar') }}">Buscar Pacientes</a></li>
+    </ul>
+
+    <button onclick="history.back()" class="btn">Voltar</button>
+</body>
+</html>

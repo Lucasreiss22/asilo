@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Relatório</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .navbar {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"],
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <span>Usuário: {{ usuario.nome if usuario else 'Desconhecido' }}</span>
+        <span>ID: {{ usuario.id if usuario else 'Desconhecido' }}</span>
+        <span>{{ data_hora_atual }}</span>
+    </div>      
+
+    <button onclick="history.back()" class="btn btn-secondary">Voltar</button>
+    
+    <h2>Adicionar Relatório para {{ paciente['nome'] }}</h2>
+    <form action="" method="POST">
+        <label for="data">Data:</label>
+        <input type="date" id="data" name="data" required><br><br>
+
+        <label for="responsavel">Responsável (Nome e Função):</label>
+        <input type="text" id="responsavel" name="responsavel" required><br><br>
+
+        <h3>1. Sinais Vitais:</h3>
+        <label for="pressao">Pressão Arterial:</label>
+        <input type="text" id="pressao" name="pressao" required><br><br>
+        <label for="frequencia_cardiaca">Frequência Cardíaca:</label>
+        <input type="text" id="frequencia_cardiaca" name="frequencia_cardiaca" required><br><br>
+        <label for="temperatura">Temperatura:</label>
+        <input type="text" id="temperatura" name="temperatura" required><br><br>
+
+        <h3>2. Estado Geral:</h3>
+        <label for="consciencia">Consciência:</label>
+        <input type="text" id="consciencia" name="consciencia" required><br><br>
+        <label for="dor">Dor (intensidade de 0 a 10):</label>
+        <input type="text" id="dor" name="dor" required><br><br>
+
+        <h3>3. Alimentação e Hidratação:</h3>
+        <label for="refeicoes">Refeições (porcentagem ingerida):</label>
+        <input type="text" id="refeicoes" name="refeicoes" required><br><br>
+        <label for="hidratacao">Hidratação:</label>
+        <input type="text" id="hidratacao" name="hidratacao" required><br><br>
+
+        <h3>4. Mobilidade e Higiene:</h3>
+        <label for="mobilidade">Mobilidade:</label>
+        <input type="text" id="mobilidade" name="mobilidade" required><br><br>
+        <label for="higiene">Higiene (fraldas trocadas, etc.):</label>
+        <input type="text" id="higiene" name="higiene" required><br><br>
+
+        <h3>5. Medicamentos:</h3>
+        <textarea id="medicamentos" name="medicamentos" rows="4" required></textarea><br><br>
+
+        <h3>6. Observações:</h3>
+        <textarea id="observacoes" name="observacoes" rows="4"></textarea><br><br>
+
+        <input type="submit" value="Salvar Relatório">
+    </form>
+
+    <a href="{{ url_for('ver_relatorios', cpf=paciente.cpf) }}">Voltar para Relatórios</a>
+</body>
+</html>
